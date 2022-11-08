@@ -5,6 +5,48 @@
       "email": "maheshtamrakar369@gmail.com",
       "password": "abc@123",
       "id": 1
+    },
+    {
+      "name": "shrishti negi",
+      "password": "shrishti12",
+      "email": "shrishti234@gmail.com",
+      "id": 2
+    },
+    {
+      "name": "Parikshit Pandey",
+      "password": "123",
+      "email": "parikshit@gmail.com",
+      "id": 3
+    },
+    {
+      "name": "doreamon",
+      "password": "jaadu",
+      "email": "magic@makewebsite.come",
+      "id": 4
+    },
+    {
+      "name": "dfsafd",
+      "password": "sdf",
+      "email": "dfasf",
+      "id": 5
+    },
+    {
+      "name": "sdfsadf",
+      "password": "sdfasf",
+      "email": "sdfasfd",
+      "id": 6
+    },
+    {
+      "name": "dsfasdf",
+      "password": "sdfasdf",
+      "email": "sdafsadf",
+      "id": 7
+    },
+    {
+      "name": "maheshtamrkar",
+      "password": "123",
+      "email": "maheshtamarakar369@gmail.com",
+      "id": 8
     }
   ]
 }
