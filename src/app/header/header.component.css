@@ -37,13 +37,13 @@
 .nav .nav-search input {
   flex: 1;
   height: 35px;
-  border: 2px solid blueviolet;
+  border: 1px solid blueviolet;
   border-right: 0px;
   color: blueviolet;
 }
 
 .nav .nav-search button {
-  height: 40px;
-  border: 2px solid blueviolet;
+  height: 38px;
+  border: 1px solid blueviolet;
   color: blueviolet;
 }
