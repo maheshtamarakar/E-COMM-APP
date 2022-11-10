@@ -52,3 +52,7 @@
   text-decoration: none;
   color: blueviolet;
 }
+
+.seller-account li:nth-child(3){
+  cursor: pointer;
+}
