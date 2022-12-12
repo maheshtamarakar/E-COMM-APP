@@ -37,3 +37,7 @@ body {
   margin-bottom: auto;
   margin-bottom: 20px;
 }
+
+.message-p{
+  color: green;
+}

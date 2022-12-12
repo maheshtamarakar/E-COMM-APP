@@ -48,5 +48,34 @@
       "email": "maheshtamarakar369@gmail.com",
       "id": 8
     }
+  ],
+  "products": [
+    {
+      "name": "dsfsa",
+      "price": "sdfsa",
+      "color": "safdas",
+      "category": "sadfas",
+      "description": "",
+      "image": "",
+      "id": 1
+    },
+    {
+      "name": "sdfas",
+      "price": "fas",
+      "color": "sdfas",
+      "category": "sdf",
+      "description": "sdf",
+      "image": "sadf",
+      "id": 2
+    },
+    {
+      "name": "sdf",
+      "price": "asdf",
+      "color": "sadf",
+      "category": "sdfa",
+      "description": "sdaf",
+      "image": "sdaf",
+      "id": 3
+    }
   ]
 }
