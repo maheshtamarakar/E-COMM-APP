@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from '../data-type';
 import { ProductService } from '../services/product.service';
 
@@ -15,7 +15,7 @@ export class SellerAddProductComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  addProductData(productData: Product) {
+  addProductData(productData: Product, prod: any) {
     console.log(productData);
     this.product.addProduct(productData).subscribe((result) => {
       console.log(result);
@@ -25,9 +25,8 @@ export class SellerAddProductComponent implements OnInit {
           this.addProductMessage = undefined
         }, 3000);
       }
-
-
     })
+    prod.reset();
   }
 
 }
