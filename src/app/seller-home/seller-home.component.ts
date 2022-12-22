@@ -9,6 +9,7 @@ import { ProductService } from '../services/product.service';
 })
 export class SellerHomeComponent implements OnInit {
   productList: undefined | Product[];
+  deleteMessage: undefined | string;
   constructor( private _product: ProductService ) { }
 
   ngOnInit(): void {
@@ -18,6 +19,15 @@ export class SellerHomeComponent implements OnInit {
   getProductList(){
     this._product.productList().subscribe((result) => {
       this.productList = result
+    })
+  }
+
+  deleteProduct(id: number){
+    this._product.prodDelete(id).subscribe((result)=>{
+      if (result){
+        this.deleteMessage = 'Product has been deleted!'
+        this.getProductList()
+      }
     })
   }
 
