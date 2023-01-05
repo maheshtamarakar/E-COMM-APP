@@ -12,10 +12,18 @@ export class ProductService {
   constructor(private http:HttpClient) { }
   
   addProduct(data: Product){
-    return this.http.post(this.url, data) 
+    return this.http.post(this.url, data)
   }
 
   productList(): Observable<any>{
     return this.http.get<Product[]>(this.url)
+  }
+
+  prodDelete(id: number): Observable<any>{
+    return this.http.delete(this.url + `/${id}`)
+  }
+
+  getProduct(id: string): Observable<Product>{
+    return this.http.get<Product>(this.url + `/${id}`)
   }
 }

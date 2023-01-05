@@ -9,6 +9,7 @@
                 <th>Color</th>
                 <th>Category</th>
                 <th>Description</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,10 @@
                 <td>{{item.color}}</td>
                 <td>{{item.category}}</td>
                 <td>{{item.description}}</td>
+                <td>
+                    <mat-icon style="cursor: pointer;" (click)="deleteProduct(item.id)">delete_forever</mat-icon>
+                    <mat-icon routerLink="/seller-update-product/{{item.id}}" style="cursor: pointer;" >edit</mat-icon>
+                </td>
             </tr>
         </tbody>
     </table>
