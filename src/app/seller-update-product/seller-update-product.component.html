@@ -1,6 +1,5 @@
-<div class="update-product">
+<div class="update-product mt-2">
     <h1>Update Product</h1>
-    <!-- <p class="message-p" >{{updateProductMessage}}</p> -->
     <form class="common-form" #updateProduct="ngForm"
         (ngSubmit)="updateProductData(updateProduct.value, updateProduct)">
         <input class="form-input" name="name" ngModel="{{productData?.name}}" type="text"
