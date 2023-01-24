@@ -18,3 +18,7 @@ export interface Product{
     image: string
     id: number
 }
+
+export interface productUpdated{
+    updateProductMessage: string | undefined
+}

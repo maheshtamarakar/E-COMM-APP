@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../data-type';
+import { Product, productUpdated } from '../data-type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   url: string = "http://localhost:3000/products";
+  productUpdate: productUpdated = {
+    'updateProductMessage': undefined
+  }
 
   constructor(private http:HttpClient) { }
   
@@ -25,5 +28,9 @@ export class ProductService {
 
   getProduct(id: string): Observable<Product>{
     return this.http.get<Product>(this.url + `/${id}`)
+  }
+
+  updateProduct(product: Product, id: string | null): Observable<Product>{
+    return this.http.put<Product>(this.url + `/${id}`, product)
   }
 }

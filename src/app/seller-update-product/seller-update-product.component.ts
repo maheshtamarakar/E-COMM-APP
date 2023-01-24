@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../data-type';
 import { ProductService } from '../services/product.service';
 
@@ -9,8 +9,11 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['./seller-update-product.component.css']
 })
 export class SellerUpdateProductComponent implements OnInit {
-  productData: undefined| Product;
-  constructor(private _route: ActivatedRoute, private _product: ProductService){}
+  productData: undefined | Product;
+  constructor(private _route: ActivatedRoute,
+    private _product: ProductService,
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
     let productId = this._route.snapshot.paramMap.get('id'); //*why id -> bcoz at routing file I have set it to be id
@@ -19,7 +22,14 @@ export class SellerUpdateProductComponent implements OnInit {
       this.productData = data;
     })
   }
-  updateProductData(data: any, value: any){
-
+  updateProductData(data: Product, value: any) {
+    console.log('data ->', data);
+    let productId = this._route.snapshot.paramMap.get('id');
+    this._product.updateProduct(data, productId).subscribe(res => {
+      if (res) {
+        this._product.productUpdate['updateProductMessage'] = "Product updated"
+        this.route.navigate(['/seller-home'])
+      }
+    })
   }
 }
