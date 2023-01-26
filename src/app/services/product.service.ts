@@ -33,4 +33,8 @@ export class ProductService {
   updateProduct(product: Product, id: string | null): Observable<Product>{
     return this.http.put<Product>(this.url + `/${id}`, product)
   }
+
+  popularProduct(): Observable<any>{
+    return this.http.get<Product[]>(this.url + '?_limit=4')
+  }
 }

@@ -1,0 +1,16 @@
+ngb-carousel {
+  background: #0000008c;
+  width: 100%;
+  margin-top: 4rem;
+}
+
+.popular_product_img {
+  height: 450px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.carousel-caption {
+  background: #00000096;
+  border-radius: 5px;
+}
