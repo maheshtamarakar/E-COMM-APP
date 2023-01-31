@@ -35,6 +35,10 @@ export class ProductService {
   }
 
   popularProduct(): Observable<any>{
-    return this.http.get<Product[]>(this.url + '?_limit=4')
+    return this.http.get<Product[]>(this.url + '?_limit=3')
+  }
+
+  trendyProduct(): Observable<any>{
+    return this.http.get<Product[]>(this.url + '?_limit=8')
   }
 }
