@@ -41,4 +41,8 @@ export class ProductService {
   trendyProduct(): Observable<any>{
     return this.http.get<Product[]>(this.url + '?_limit=8')
   }
+
+  searchProduct(query: string): Observable<any>{
+    return this.http.get<Product[]>(this.url + `?q=${query}`)
+  }
 }
