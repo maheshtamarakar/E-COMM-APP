@@ -56,3 +56,23 @@
 .seller-account li:nth-child(3){
   cursor: pointer;
 }
+
+.suggested-result{
+  position: absolute;
+  display: list-item !important;
+  z-index: 10;
+  background-color: #ffff;
+  width: 350px;
+  top: 44px;
+  border: 1px solid #ddd;
+}
+
+.suggested-result li{
+  border: 1px solid #fff;
+  padding: 5px;
+}
+
+.suggested-result li a{
+  cursor: pointer;
+  color: blueviolet;
+}
