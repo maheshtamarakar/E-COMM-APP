@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   sellerName: string = ''
   searchInput = new FormControl('');
   searchResult: undefined | Product[];
+  userName: string = '';
   constructor(
     private route: Router,
     private _product: ProductService
@@ -44,8 +45,12 @@ export class HeaderComponent implements OnInit {
           this.menuType = 'seller'
           let sellerData = sellerStore && JSON.parse(sellerStore)[0];
           this.sellerName = sellerData.name;
-
-        } else {
+        }else if(localStorage.getItem('user')){
+          let userStore = localStorage.getItem('user')
+          let userData = userStore && JSON.parse(userStore);
+          this.userName = userData.name;
+          this.menuType = 'user';
+        }else{
           console.log("out of seller area");
           this.menuType = 'default'
         }
@@ -53,10 +58,15 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  // LogOut function
+  // seller LogOut function
   logout() {
     localStorage.removeItem('seller')
     this.route.navigate(['/'])
+  }
+
+  userLogout(){
+    localStorage.removeItem('user')
+    this.route.navigate(['/user-auth'])
   }
 
   hideSearch(){
@@ -65,6 +75,10 @@ export class HeaderComponent implements OnInit {
   submitSearch(){
     const val = this.searchInput.value
     this.route.navigate([`search/${val}`])
+  }
+
+  redirectToDetail(id: number){
+    this.route.navigate(['/details/'+id])
   }
 
 }
