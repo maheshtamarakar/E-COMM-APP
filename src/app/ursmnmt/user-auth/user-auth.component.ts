@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserAuthComponent {
   showLogin: boolean = true;
+  authError: string = ''
   constructor(
     private _userService: UserService
     ){}
@@ -23,6 +24,11 @@ export class UserAuthComponent {
 
   login(data: Login){
     this._userService.userLogin(data);
+    this._userService.inValidUserAuth.subscribe((result) => {
+    if(result){
+      this.authError = "Please enter valid user details";
+    }
+    })
   }
 
   openSignUp(){

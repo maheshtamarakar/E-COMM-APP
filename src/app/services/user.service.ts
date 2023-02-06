@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login, SignUp } from '../data-type';
 
@@ -7,7 +7,7 @@ import { Login, SignUp } from '../data-type';
   providedIn: 'root'
 })
 export class UserService {
-
+  inValidUserAuth = new EventEmitter<boolean>(false);
   constructor(
     private  http: HttpClient,
     private _router: Router
@@ -27,9 +27,12 @@ export class UserService {
     this.http.get<SignUp[]>(`http://localhost:3000/users?email=${data.email}&password=${data.password}`,
     {observe: 'response'})
     .subscribe(result =>{
-      if(result && result.body){
+      if(result && result.body?.length){
+        this.inValidUserAuth.emit(false)
         localStorage.setItem('user', JSON.stringify(result.body[0]))
         this._router.navigate(['/'])
+      }else{
+        this.inValidUserAuth.emit(true)
       }
     })
   }
@@ -37,8 +40,6 @@ export class UserService {
   userAuthReload(){
     let userData = localStorage.getItem('user')
     if(userData){
-      console.log("localStorage.getItem('user')", localStorage.getItem('user'));
-      
       this._router.navigate(['/'])
     }
 

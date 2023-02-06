@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   searchInput = new FormControl('');
   searchResult: undefined | Product[];
   userName: string = '';
+  cartItems = 0
   constructor(
     private route: Router,
     private _product: ProductService
@@ -55,6 +56,14 @@ export class HeaderComponent implements OnInit {
           this.menuType = 'default'
         }
       }
+    })
+
+    let cartData = localStorage.getItem('localCart')
+    if(cartData){
+      this.cartItems = JSON.parse(cartData).length
+    }
+    this._product.cartData.subscribe((items)=>{
+      this.cartItems = items.length
     })
   }
 
