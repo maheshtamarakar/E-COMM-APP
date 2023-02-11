@@ -61,6 +61,11 @@
   margin-top: -20px !important;
   text-align: left;
 }
+
+.max-width{
+  width: 100%;
+}
+
 button:disabled{
   cursor: not-allowed;
 }
