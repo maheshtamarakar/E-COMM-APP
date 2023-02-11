@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   searchInput = new FormControl('');
   searchResult: undefined | Product[];
   userName: string = '';
+  cartItems = 0
   constructor(
     private route: Router,
     private _product: ProductService
@@ -50,13 +51,25 @@ export class HeaderComponent implements OnInit {
           let userData = userStore && JSON.parse(userStore);
           this.userName = userData.name;
           this.menuType = 'user';
+          this._product.getCartList(userData.id)
         }else{
           console.log("out of seller area");
           this.menuType = 'default'
         }
       }
     })
+
+    // make a radio button giving true and false
+
+    let cartData = localStorage.getItem('localCart')
+    if(cartData){
+      this.cartItems = JSON.parse(cartData).length
+    }else{
+    this._product.cartData.subscribe((items)=>{
+      this.cartItems = items.length
+    })
   }
+}
 
   // seller LogOut function
   logout() {
@@ -67,6 +80,7 @@ export class HeaderComponent implements OnInit {
   userLogout(){
     localStorage.removeItem('user')
     this.route.navigate(['/user-auth'])
+    this._product.cartData.emit([])
   }
 
   hideSearch(){

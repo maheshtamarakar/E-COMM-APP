@@ -21,6 +21,9 @@ import { SearchComponent } from './header/search/search.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserAuthComponent } from './ursmnmt/user-auth/user-auth.component';
 import { FooterComponent } from './footer/footer.component';
+import { CartPageComponent } from './cart-page/cart-page.component';
+import { CheckoutComponent } from './cart-page/checkout/checkout.component';
+import { MyOrdersComponent } from './cart-page/my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { FooterComponent } from './footer/footer.component';
     SearchComponent,
     ProductDetailsComponent,
     UserAuthComponent,
-    FooterComponent
+    FooterComponent,
+    CartPageComponent,
+    CheckoutComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@
   background: red;
   padding: 11px 0;
   border-radius: 5px;
-  width: 38%;
+  /* width: 38%; */
   margin: auto;
   margin-bottom: auto;
   margin-bottom: 20px;
@@ -37,6 +37,7 @@
 
 .message-p{
   color: green;
+  text-align: center;
 }
 
 .mt-2{
@@ -55,5 +56,19 @@
   background: green;
 }
 
+.invalid-input{
+  color: red;
+  font-size: 12px;
+  margin-top: -20px !important;
+  text-align: left;
+}
+
+.max-width{
+  width: 100%;
+}
+
+button:disabled{
+  cursor: not-allowed;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
