@@ -24,6 +24,7 @@
             <li><a routerLink="/seller-auth">Seller</a></li>
             <li><a routerLink="/">Home</a></li>
             <li><a routerLink="/">{{userName | titlecase}}</a></li>
+            <li><a class="pointer" routerLink="/my-orders">My Orders</a></li>
             <li><a class="pointer" (click)="userLogout()">Logout</a></li>
             <li><a routerLink="cart-page">Cart({{cartItems}})</a></li>
         </ul>
