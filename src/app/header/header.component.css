@@ -1,6 +1,8 @@
 .nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
 }
 
 .nav h1 {
@@ -18,7 +20,7 @@
 
 .nav li {
   padding-left: 15px;
-  padding-top: 15px;
+  /* padding-top: 15px; */
 }
 
 .nav li a {
@@ -48,16 +50,16 @@
   color: blueviolet;
 }
 
-.nav h1 a{
+.nav h1 a {
   text-decoration: none;
   color: blueviolet;
 }
 
-.seller-account li:nth-child(3){
+.seller-account li:nth-child(3) {
   cursor: pointer;
 }
 
-.suggested-result{
+.suggested-result {
   position: absolute;
   display: list-item !important;
   z-index: 10;
@@ -67,12 +69,12 @@
   border: 1px solid #ddd;
 }
 
-.suggested-result li{
+.suggested-result li {
   border: 1px solid #fff;
   padding: 5px;
 }
 
-.suggested-result li a{
+.suggested-result li a {
   cursor: pointer;
   color: blueviolet;
 }
