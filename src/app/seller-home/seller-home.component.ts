@@ -26,6 +26,7 @@ export class SellerHomeComponent implements OnInit {
 
   getProductList() {
     this._product.productList().subscribe((result) => {
+      console.log('productList', result);
       this.productList = result
     })
   }
@@ -36,7 +37,12 @@ export class SellerHomeComponent implements OnInit {
         this.deleteMessage = 'Product has been deleted!'
         this.getProductList()
       }
-    })
+    },
+    (err)=>{
+      console.log('some error occurred in deleting product');
+      
+    }
+    )
   }
 
 }

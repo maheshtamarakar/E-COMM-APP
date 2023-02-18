@@ -87,6 +87,8 @@ export class ProductDetailsComponent implements OnInit {
     } else {
       let user = localStorage.getItem('user')
       let userId = user && JSON.parse(user).id
+      console.log('remove to cart cartData', this.cartData);
+      
       this.cartData && this._productService.removeToCart(this.cartData.id)
       .subscribe((result) => {
         if(result){

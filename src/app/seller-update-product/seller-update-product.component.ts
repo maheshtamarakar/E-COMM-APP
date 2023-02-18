@@ -26,6 +26,8 @@ export class SellerUpdateProductComponent implements OnInit {
     console.log('data ->', data);
     let productId = this._route.snapshot.paramMap.get('id');
     this._product.updateProduct(data, productId).subscribe(res => {
+      console.log("updated product res", res);
+      
       if (res) {
         this._product.productUpdate['updateProductMessage'] = "Product updated"
         this.route.navigate(['/seller-home'])
