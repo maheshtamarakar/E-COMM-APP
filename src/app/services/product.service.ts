@@ -11,7 +11,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ProductService {
-  url: string = "http://localhost:3000/products";
   productUpdate: productUpdated = {
     'updateProductMessage': undefined
   }
@@ -116,16 +115,17 @@ export class ProductService {
   }
 
   orderNow(data: Order){
-    return this.http.post("http://localhost:3000/orders", data)
+    const payload = JSON.stringify(data);
+    return this.http.post("http://127.0.0.1:5000/orders", payload, httpOptions)
   }
 
   orderList(){
     let userStore = localStorage.getItem('user')
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<Order[]>("http://localhost:3000/orders?userId="+userData.id)
+    return this.http.get<Order[]>("http://127.0.0.1:5000/orders?userId="+userData.id)
   }
   deleteCartItems(cartId: number){
-    return this.http.delete("http://localhost:3000/cart/"+cartId, {observe: 'response'}).subscribe((result)=>{
+    return this.http.delete("http://127.0.0.1:5000/cart/"+cartId, httpOptions).subscribe((result)=>{
       if(result){
         this.cartData.emit([])
       }
@@ -133,7 +133,7 @@ export class ProductService {
   }
 
   cancelOrder(orderId: number){
-  return this.http.delete("http://localhost:3000/orders/"+orderId);
+  return this.http.delete("http://127.0.0.1:5000/order/"+orderId);
 }
 
 }
