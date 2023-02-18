@@ -86,18 +86,6 @@
       "productId": 23,
       "userId": null,
       "id": 5
-    },
-    {
-      "category": "Tablet",
-      "color": "black",
-      "description": "IPhad latest version",
-      "image": "https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dGFibGV0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60",
-      "name": "IPhad",
-      "price": 90000,
-      "quantity": 1,
-      "productId": 3,
-      "userId": null,
-      "id": 6
     }
   ],
   "orders": [
@@ -116,6 +104,22 @@
       "totalPrice": 100,
       "userId": 5,
       "id": 2
+    },
+    {
+      "email": "",
+      "address": "",
+      "contact": "",
+      "totalPrice": 100,
+      "userId": 3,
+      "id": 3
+    },
+    {
+      "email": "",
+      "address": "",
+      "contact": "",
+      "totalPrice": 100,
+      "userId": 3,
+      "id": 4
     }
   ]
 }

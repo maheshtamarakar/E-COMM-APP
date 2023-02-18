@@ -91,8 +91,6 @@ export class ProductService {
   }
 
   addToCart(cartData: Cart){
-    console.log('cartData', cartData);
-    
     const payload = JSON.stringify(cartData);
     return this.http.post("http://127.0.0.1:5000/cart", payload, httpOptions);
   }
@@ -107,15 +105,13 @@ export class ProductService {
   }
 
   removeToCart(cartId: number){
-    console.log('remove To Cart');
-    
-    return this.http.delete("http://localhost:3000/cart/"+cartId);
+    return this.http.delete("http://127.0.0.1:5000/cart/"+cartId, httpOptions);
   }
 
   currentCart(){
     let userStore = localStorage.getItem('user')
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<Cart[]>("http://localhost:3000/cart?userId="+userData.id);
+    return this.http.get<Cart[]>("http://127.0.0.1:5000/cart?userId="+userData.id);
 
   }
 

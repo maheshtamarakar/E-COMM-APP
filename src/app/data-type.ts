@@ -20,6 +20,7 @@ export interface Product{
     quantity: undefined | number
     productId: undefined | number
     seller_id: undefined | number
+    userId: number
 }
 
 export interface Cart{

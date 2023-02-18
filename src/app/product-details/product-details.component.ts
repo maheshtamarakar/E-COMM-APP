@@ -38,6 +38,7 @@ export class ProductDetailsComponent implements OnInit {
         this._productService.getCartList(userId);
         this._productService.cartData.subscribe(result => {
           let item = result.filter((item: Product) => productId?.toString() === item.productId?.toString())
+          
           if (item.length) {
             this.cartData = item[0];
             this.removeCart = true;
@@ -87,8 +88,6 @@ export class ProductDetailsComponent implements OnInit {
     } else {
       let user = localStorage.getItem('user')
       let userId = user && JSON.parse(user).id
-      console.log('remove to cart cartData', this.cartData);
-      
       this.cartData && this._productService.removeToCart(this.cartData.id)
       .subscribe((result) => {
         if(result){
