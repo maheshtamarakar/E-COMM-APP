@@ -24,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { CheckoutComponent } from './cart-page/checkout/checkout.component';
 import { MyOrdersComponent } from './cart-page/my-orders/my-orders.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MyOrdersComponent } from './cart-page/my-orders/my-orders.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatBadgeModule,
     NgbModule
   ],
   providers: [],
