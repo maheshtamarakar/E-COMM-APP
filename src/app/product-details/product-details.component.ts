@@ -38,6 +38,7 @@ export class ProductDetailsComponent implements OnInit {
         this._productService.getCartList(userId);
         this._productService.cartData.subscribe(result => {
           let item = result.filter((item: Product) => productId?.toString() === item.productId?.toString())
+          
           if (item.length) {
             this.cartData = item[0];
             this.removeCart = true;

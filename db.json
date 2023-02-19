@@ -64,40 +64,28 @@
   ],
   "cart": [
     {
-      "name": "Iphone211",
-      "price": "80000",
+      "category": "cycle",
+      "color": "grey",
+      "description": "a road bike will always have a lightweight design,",
+      "image": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmljeWNsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",
+      "name": "Mountain Cycle",
+      "price": 50000,
+      "quantity": 4,
+      "productId": 28,
+      "userId": null,
+      "id": 4
+    },
+    {
+      "category": "white",
       "color": "white",
-      "category": "mobile",
       "description": "This is apple product",
       "image": "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+      "name": "Iphone12",
+      "price": 80000,
       "quantity": 1,
-      "userId": 5,
-      "productId": 1,
-      "id": 1
-    },
-    {
-      "name": "samsang A90",
-      "price": "53000",
-      "color": "blue",
-      "category": "Mobile",
-      "description": "3 year old but best product",
-      "image": "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a90-5g.jpg",
-      "quantity": 1,
-      "userId": 5,
-      "productId": 2,
-      "id": 2
-    },
-    {
-      "name": "Vivo V25 5G (12GB RAM, 256GB, Surfing Blue)",
-      "price": "31999.00",
-      "color": "Blue",
-      "category": "Mobile",
-      "description": "Key Features\n\n    Display: 6.44 inches (16.35 cm), AMOLED, 90 Hz Refresh Rate\n    Memory: 12GB RAM, 256GB ROM, Memory Card Slot\n    Processor: MediaTek Dimensity 900, Octa Core, 2.4 GHz\n    Camera: 64MP + 8MP + 2MP Triple Rear & 50MP Front Camera\n    Battery: 4500 mAh with 44W Flash Charging\n    Sensor: Fingerprint Sensor, Accelerometer, Proximity Sensor\n",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDAZla-VXlvxEfPnWt66GaDFuSfBZ-BCXTTuiI8MRJBA&s",
-      "quantity": 1,
-      "userId": 5,
-      "productId": 4,
-      "id": 3
+      "productId": 23,
+      "userId": null,
+      "id": 5
     }
   ],
   "orders": [
@@ -108,6 +96,30 @@
       "totalPrice": 133100,
       "userId": 5,
       "id": 1
+    },
+    {
+      "email": "",
+      "address": "",
+      "contact": "",
+      "totalPrice": 100,
+      "userId": 5,
+      "id": 2
+    },
+    {
+      "email": "",
+      "address": "",
+      "contact": "",
+      "totalPrice": 100,
+      "userId": 3,
+      "id": 3
+    },
+    {
+      "email": "",
+      "address": "",
+      "contact": "",
+      "totalPrice": 100,
+      "userId": 3,
+      "id": 4
     }
   ]
 }

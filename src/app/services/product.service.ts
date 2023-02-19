@@ -1,51 +1,69 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart, Order, Product, productUpdated } from '../data-type';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  url: string = "http://localhost:3000/products";
   productUpdate: productUpdated = {
     'updateProductMessage': undefined
   }
 
   cartData = new EventEmitter<Product[] | []>()
 
-  constructor(private http:HttpClient) { }
-  
+  constructor(private http:HttpClient) {}
+
   addProduct(data: Product){
-    return this.http.post(this.url, data)
+    let sellerInfo = localStorage.getItem('seller')
+    let convToObj = sellerInfo && JSON.parse(sellerInfo)[0]
+    const sellerId = convToObj.seller_id
+    data.seller_id  = sellerId;
+    const payload = JSON.stringify(data);
+    //* don't forget price is integer */
+    //******************* to send the post data you need httpsOptions ********************************
+    return this.http.post('http://127.0.0.1:5000/product', payload, httpOptions)
   }
 
   productList(): Observable<any>{
-    return this.http.get<Product[]>(this.url)
+    let sellerInfo = localStorage.getItem('seller')
+    let convToObj = sellerInfo && JSON.parse(sellerInfo)[0]
+    const sellerId = convToObj.seller_id
+    return this.http.get<Product[]>(`http://127.0.0.1:5000/product?seller_id=${sellerId}`)
   }
 
   prodDelete(id: number): Observable<any>{
-    return this.http.delete(this.url + `/${id}`)
+    return this.http.delete('http://127.0.0.1:5000/product' + `/${id}`,
+    httpOptions) // to get json server response
   }
 
   getProduct(id: string): Observable<Product>{
-    return this.http.get<Product>(this.url + `/${id}`)
+    return this.http.get<Product>('http://127.0.0.1:5000/product' + `/${id}`)
   }
 
   updateProduct(product: Product, id: string | null): Observable<Product>{
-    return this.http.put<Product>(this.url + `/${id}`, product)
+    const payload = JSON.stringify(product);
+    return this.http.put<Product>('http://127.0.0.1:5000/product' + `/${id}`, payload, httpOptions)
   }
 
   popularProduct(): Observable<any>{
-    return this.http.get<Product[]>(this.url + '?_limit=3')
+    const params = {limit: 3}
+    return this.http.get<Product[]>('http://127.0.0.1:5000/product', {params})
   }
 
   trendyProduct(): Observable<any>{
-    return this.http.get<Product[]>(this.url + '?_limit=8')
+    const params = {limit: 8}
+    return this.http.get<Product[]>('http://127.0.0.1:5000/product', {params})
   }
 
   searchProduct(query: string): Observable<any>{
-    return this.http.get<Product[]>(this.url + `?q=${query}`)
+    const params = {query: query}
+    return this.http.get<Product[]>('http://127.0.0.1:5000/product', {params})
   }
   localAddToCart(data: Product){
     let cartData = [];
@@ -72,11 +90,12 @@ export class ProductService {
   }
 
   addToCart(cartData: Cart){
-    return this.http.post("http://localhost:3000/cart", cartData);
+    const payload = JSON.stringify(cartData);
+    return this.http.post("http://127.0.0.1:5000/cart", payload, httpOptions);
   }
   
   getCartList(userId: number){
-    return this.http.get<Product[]>("http://localhost:3000/cart?userId=" + userId,
+    return this.http.get<Product[]>("http://127.0.0.1:5000/cart?userId=" + userId,
     {observe: 'response'}).subscribe((result)=>{
       if(result && result.body){
         this.cartData.emit(result.body);
@@ -85,27 +104,28 @@ export class ProductService {
   }
 
   removeToCart(cartId: number){
-    return this.http.delete("http://localhost:3000/cart/"+cartId);
+    return this.http.delete("http://127.0.0.1:5000/cart/"+cartId, httpOptions);
   }
 
   currentCart(){
     let userStore = localStorage.getItem('user')
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<Cart[]>("http://localhost:3000/cart?userId="+userData.id);
+    return this.http.get<Cart[]>("http://127.0.0.1:5000/cart?userId="+userData.id);
 
   }
 
   orderNow(data: Order){
-    return this.http.post("http://localhost:3000/orders", data)
+    const payload = JSON.stringify(data);
+    return this.http.post("http://127.0.0.1:5000/orders", payload, httpOptions)
   }
 
   orderList(){
     let userStore = localStorage.getItem('user')
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<Order[]>("http://localhost:3000/orders?userId="+userData.id)
+    return this.http.get<Order[]>("http://127.0.0.1:5000/orders?userId="+userData.id)
   }
   deleteCartItems(cartId: number){
-    return this.http.delete("http://localhost:3000/cart/"+cartId, {observe: 'response'}).subscribe((result)=>{
+    return this.http.delete("http://127.0.0.1:5000/cart/"+cartId, httpOptions).subscribe((result)=>{
       if(result){
         this.cartData.emit([])
       }
@@ -113,7 +133,7 @@ export class ProductService {
   }
 
   cancelOrder(orderId: number){
-  return this.http.delete("http://localhost:3000/orders/"+orderId);
+  return this.http.delete("http://127.0.0.1:5000/order/"+orderId);
 }
 
 }
