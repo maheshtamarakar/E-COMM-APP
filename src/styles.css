@@ -1,3 +1,10 @@
+body{
+  font-size: 13px;
+  line-height: 19px;
+  color: #111;
+}
+
+
 .container {
   margin: 0 5%;
 }
@@ -7,21 +14,34 @@
   flex-direction: column;
   width: 300px;
   margin: auto;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .form-input {
-  height: 35px;
+  /* height: 35px;
   margin-bottom: 20px;
   border: 1px solid blueviolet;
   color: blueviolet;
+  padding-left: 10px; */
+  height: 35px;
+  margin-bottom: 20px;
+  border: 1px solid #0f1111;
+  border-radius: 4px;
   padding-left: 10px;
 }
 
 .form-btn {
+  /* cursor: pointer;
+  height: 35px;
+  border: 1px solid blueviolet; */
+
   cursor: pointer;
   height: 35px;
-  border: 1px solid blueviolet;
+  border: 1px solid #0f1111;
+  /* border: none; */
+  background: #febd69;
+  font-weight: 400;
+  border-radius: 4px;
 }
 
 .error {
@@ -35,20 +55,20 @@
   margin-bottom: 20px;
 }
 
-.message-p{
+.message-p {
   color: green;
   text-align: center;
 }
 
-.mt-2{
+.mt-2 {
   margin-top: 2rem;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
-.footer{
+.footer {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -56,19 +76,25 @@
   background: green;
 }
 
-.invalid-input{
+.invalid-input {
   color: red;
   font-size: 12px;
   margin-top: -20px !important;
   text-align: left;
 }
 
-.max-width{
+.max-width {
   width: 100%;
 }
 
-button:disabled{
+button:disabled {
   cursor: not-allowed;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

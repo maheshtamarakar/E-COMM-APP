@@ -1,12 +1,17 @@
 <div class="seller-auth">
+    <h1 routerLink="/" class="pointer">E-COMM</h1>
     <div *ngIf="!showLogin" class="sign-up">
-        <h1>Seller Sign Up</h1>
+        <h1>Create account</h1>
         <form #sellerSignUp="ngForm" (ngSubmit)="signUp(sellerSignUp.value)" class="common-form">
-            <input class="form-input" name="name" ngModel type="text" placeholder="Enter your Name">
-            <input class="form-input" name="password" ngModel type="password" placeholder="Enter your Password">
-            <input class="form-input" name="email" ngModel type="email" placeholder="Enter your Email">
+            <label for="name">Your name</label>
+            <input class="form-input" id="name" name="name" ngModel type="text" placeholder="First and last name">
+            <label for="email">Your Email</label>
+            <input class="form-input" id="email" name="email" ngModel type="email">
+            <label for="password">Password</label>
+            <input class="form-input" id="password" name="password" ngModel type="password" placeholder="Atleast 6 characters">
             <button class="form-btn">SignUp</button>
-            <a class="auth-toggle-link" (click)="toggleLoginSignUp()">Already Have Account? Click to Login</a>
+            <p>Already have an account?<a class="auth-toggle-link" (click)="toggleLoginSignUp()">Sign in</a></p>
+            
         </form>
     </div>
 

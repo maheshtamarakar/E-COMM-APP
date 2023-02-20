@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SellerService } from '../services/seller.service';
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { SignUp } from '../data-type';
 
 @Component({
@@ -8,13 +8,18 @@ import { SignUp } from '../data-type';
   templateUrl: './seller-auth.component.html',
   styleUrls: ['./seller-auth.component.css']
 })
-export class SellerAuthComponent implements OnInit {
+export class SellerAuthComponent implements OnInit, AfterViewInit {
   // all property
   showLogin: boolean = false;
   authError: string = '';
-  // tips 
+  // tips
   // always make sure to make the return type of function
-  constructor(private seller: SellerService, private router: Router ) { }
+
+  constructor(
+    private seller: SellerService, 
+    private router: Router,
+    private _activeRoute: ActivatedRoute,
+    ) { }
   // inside the constructor parameter we make objects
 
   ngOnInit(): void {
@@ -41,6 +46,18 @@ export class SellerAuthComponent implements OnInit {
   // show login or signup 
   toggleLoginSignUp(){
     this.showLogin = !this.showLogin;
+  }
+
+  ngAfterViewInit(){
+    this._activeRoute.params.subscribe(params => {
+      const currentUrl = this._activeRoute.snapshot.url.join('/');
+      this.seller.url.next(currentUrl)
+      console.log('currentUrl', currentUrl);
+    });
+  }
+
+  ngOnDestroy(){
+    this.seller.url.next('')
   }
 
 
