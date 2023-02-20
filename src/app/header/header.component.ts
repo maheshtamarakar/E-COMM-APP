@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { ProductService } from '../services/product.service';
 import { FormControl } from '@angular/forms';
 import { Product } from '../data-type';
@@ -20,9 +20,10 @@ export class HeaderComponent implements OnInit {
   constructor(
     private route: Router,
     private _product: ProductService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+
     this.searchInput.valueChanges
       .pipe(
         debounceTime(500),
@@ -53,7 +54,6 @@ export class HeaderComponent implements OnInit {
           this.menuType = 'user';
           this._product.getCartList(userData.id)
         }else{
-          console.log("out of seller area");
           this.menuType = 'default'
         }
       }

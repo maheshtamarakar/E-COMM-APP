@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http' // will help call api url
 import { Login, SignUp } from '../data-type';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router'
 
 const httpOptions = {
@@ -15,7 +15,10 @@ export class SellerService {
   isLoginError = new EventEmitter<boolean>(false);
   //rxjs to control the authgaurd being true or false
   isSellerLoggedIn = new BehaviorSubject<boolean>(false)
+  public url = new Subject<string>();
+
   constructor(private http:HttpClient, private router: Router) { }
+
   userSignUp(data: SignUp){
     const payload = JSON.stringify(data);
     this.http.post('http://127.0.0.1:5000/auth/sign-up',
@@ -27,6 +30,7 @@ export class SellerService {
       this.router.navigate(['seller-home'])      
     })
   }
+
   userLogin(data: Login){
     this.http.get(`http://127.0.0.1:5000/auth/login?email=${data.email}&password=${data.password}`,
     {observe: 'response'} // to get json server response
@@ -42,7 +46,6 @@ export class SellerService {
       }
     })
   }
-
 
   reloadSeller(){
     if(localStorage.getItem('seller')) {
