@@ -87,6 +87,9 @@
 .seller-account li:nth-child(3) {
   cursor: pointer;
 }
+.seller-account{
+  padding: 1rem !important;
+}
 
 .suggested-result {
   position: absolute;

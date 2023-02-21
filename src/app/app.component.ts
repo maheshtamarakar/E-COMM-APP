@@ -9,7 +9,7 @@ import { SellerService } from './services/seller.service';
 })
 export class AppComponent implements OnInit {
   title = 'ecomm-project';
-  removeHeader: boolean = false;
+  isHeader: boolean = true;
   constructor(
     private _router: Router,
     private _seller: SellerService, 
@@ -19,10 +19,10 @@ export class AppComponent implements OnInit {
     this._seller.url.subscribe((url)=>{
       console.log('url: ' + url);
       
-      if(url.includes('seller-auth')){
-        this.removeHeader = true;
+      if(url.includes('seller-auth') || url.includes('user-auth')){
+        this.isHeader = false;
       }else{
-        this.removeHeader = false;
+        this.isHeader = true;
       }
     })
   }

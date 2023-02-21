@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Cart, Login, Product, SignUp } from 'src/app/data-type';
 import { ProductService } from 'src/app/services/product.service';
+import { SellerService } from 'src/app/services/seller.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,11 +15,22 @@ export class UserAuthComponent {
   authError: string = ''
   constructor(
     private _userService: UserService,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _activeRoute: ActivatedRoute,
+    private seller: SellerService,
   ) { }
 
   ngOnInit(): void {
     this._userService.userAuthReload();
+  }
+
+  
+  ngAfterViewInit() {
+    this._activeRoute.params.subscribe(params => {
+      const currentUrl = this._activeRoute.snapshot.url.join('/');
+      this.seller.url.next(currentUrl)
+      console.log('currentUrl', currentUrl);
+    });
   }
 
   signUp(data: SignUp) {
@@ -36,6 +49,7 @@ export class UserAuthComponent {
   }
 
   openSignUp() {
+    this.authError = ''
     this.showLogin = false
   }
   openLogin() {
@@ -72,5 +86,9 @@ export class UserAuthComponent {
     setTimeout(() => {
       this._productService.getCartList(userId)
     }, 2000);
+  }
+  
+  ngOnDestroy() {
+    this.seller.url.next('')
   }
 }

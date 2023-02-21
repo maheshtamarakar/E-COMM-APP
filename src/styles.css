@@ -1,9 +1,8 @@
-body{
+body {
   font-size: 13px;
   line-height: 19px;
   color: #111;
 }
-
 
 .container {
   margin: 0 5%;
@@ -47,12 +46,12 @@ body{
 .error {
   color: white;
   background: red;
-  padding: 11px 0;
+  padding: 11px;
   border-radius: 5px;
-  /* width: 38%; */
-  margin: auto;
-  margin-bottom: auto;
-  margin-bottom: 20px;
+  margin: auto !important;
+  margin-bottom: 20px !important;
+  position: absolute;
+  top: 1rem;
 }
 
 .message-p {
