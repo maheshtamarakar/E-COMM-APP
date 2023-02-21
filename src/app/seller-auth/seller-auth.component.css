@@ -26,12 +26,8 @@ a {
   font-family: ui-rounded;
 }
 
-/* .sign-up,
+.sign-up,
 .login {
-  text-align: center;
-} */
-
-.sign-up {
   padding: 2rem 1rem;
   border: 1px solid black;
   border-radius: 4px;
@@ -39,15 +35,13 @@ a {
 
 .sign-up h1,
 .login h1 {
-  /* color: blueviolet; */
-  /* margin-top: 80px;
-  margin-bottom: 50px; */
   color: #0f1111;
   font-weight: 400;
   font-size: 28px;
   line-height: 1.2;
   text-align: left;
 }
+
 .auth-toggle-link {
   margin-top: 20px;
   font-size: 14px;
@@ -56,6 +50,6 @@ a {
   margin-left: 4px;
 }
 
-.common-form p{
+.common-form p {
   margin-top: 0.3rem;
 }

@@ -16,39 +16,39 @@ export class SellerAuthComponent implements OnInit, AfterViewInit {
   // always make sure to make the return type of function
 
   constructor(
-    private seller: SellerService, 
+    private seller: SellerService,
     private router: Router,
     private _activeRoute: ActivatedRoute,
-    ) { }
+  ) { }
   // inside the constructor parameter we make objects
 
   ngOnInit(): void {
     this.seller.reloadSeller()
   }
 
-// all methods
+  // all methods
   // call signup service file to store the data
   signUp(data: SignUp): void {
     this.seller.userSignUp(data)
   }
 
   // call login service file to store the data
-  logIn(data: SignUp): void {   
+  logIn(data: SignUp): void {
     this.authError = '';
     this.seller.userLogin(data)
-    this.seller.isLoginError.subscribe((isError)=>{
-      if(isError){
+    this.seller.isLoginError.subscribe((isError) => {
+      if (isError) {
         this.authError = "Email or Password is not correct"
       }
     })
   }
 
   // show login or signup 
-  toggleLoginSignUp(){
+  toggleLoginSignUp() {
     this.showLogin = !this.showLogin;
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this._activeRoute.params.subscribe(params => {
       const currentUrl = this._activeRoute.snapshot.url.join('/');
       this.seller.url.next(currentUrl)
@@ -56,7 +56,7 @@ export class SellerAuthComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.seller.url.next('')
   }
 
