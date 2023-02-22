@@ -1,7 +1,7 @@
-<div class="product-list mt-2">
+<div class="product-list mt-2 container">
     <h1>All Products List</h1>
     <p class="message-p" >{{updateProductMessage}}</p>
-    <table>
+    <table *ngIf="isDataAvailable ">
         <thead>
             <tr>
                 <th>Image</th>
@@ -17,7 +17,7 @@
             <tr *ngFor="let item of productList">
                 <td><img src="{{item.image}}" alt=""> </td>
                 <td>{{item.name}}</td>
-                <td>{{item.price}}</td>
+                <td>₹{{item.price | number: '2.'}}</td>
                 <td>{{item.color}}</td>
                 <td>{{item.category}}</td>
                 <td>{{item.description}}</td>
@@ -28,4 +28,7 @@
             </tr>
         </tbody>
     </table>
+    <div class="no-data-found" *ngIf="!isDataAvailable">
+        No Data Fount
+    </div>
 </div>

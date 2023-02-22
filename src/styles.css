@@ -86,6 +86,20 @@ body {
   width: 100%;
 }
 
+.center-text {
+  text-align: center;
+}
+
+.no-data-found {
+  font-size: 2rem;
+  display: flex;
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-weight: 300;
+}
+
 button:disabled {
   cursor: not-allowed;
 }
