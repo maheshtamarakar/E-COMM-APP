@@ -5,32 +5,58 @@
         <div class="col-sm-7 shipping-address">
             <h3>Add shipping address</h3>
             <form #orderData="ngForm" class="common-form" (ngSubmit)="orderNow(orderData.value)">
-                <input 
-                class="form-input" 
-                type="text" 
-                placeholder="Enter User Email" 
+                <input
+                required
+                #email="ngModel"
+                class="form-input"
+                id="email"
                 name="email"
-                ngModel>
+                ngModel
+                type="email"
+                email
+                placeholder="Enter User Email" 
+              />
+              <p class="invalid-input">
+                <span *ngIf="email.invalid && email.touched"
+                  >Please Enter Valid Email</span
+                >
+              </p>
 
                 <input 
+                required
+                #address="ngModel"
                 class="form-input" 
                 type="text" 
                 placeholder="Enter your address"
                 name="address"
                 ngModel>
+                
+              <p class="invalid-input">
+                <span *ngIf="address.invalid && address.touched"
+                  >Please Enter Address</span
+                >
+              </p>
 
                 <input 
+                required
+                #contact="ngModel"
                 class="form-input" 
                 type="text" 
                 placeholder="Enter Contact Detail" 
                 name="contact"
+                minlength="10"
                 ngModel>
+                <p class="invalid-input">
+                  <span *ngIf="contact.invalid && contact.touched"
+                    >Please Enter Contact</span
+                  >
+                </p>
 
-                <button class="form-btn">Order Now</button>
+                <button [disabled]="orderData.invalid" class="form-btn">Order Now</button>
             </form>
         </div>
         <div class="col-sm-5">
-            <h3>Total Amount : {{totalPrice}}</h3>
+            <h3>Total Amount : ₹{{totalPrice | number: '2.'}}</h3>
             <h4>Payment Method : <b>Pay On Delivery</b></h4>
         </div>
     </div>

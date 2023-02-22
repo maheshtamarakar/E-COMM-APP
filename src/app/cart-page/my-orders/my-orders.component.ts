@@ -9,6 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class MyOrdersComponent implements OnInit {
   orderData: Order[] | undefined;
+  isDataAvailable: boolean = false;
   constructor(
     private _productService: ProductService
   ){}
@@ -24,7 +25,12 @@ export class MyOrdersComponent implements OnInit {
 
     getOrderList(){
       this._productService.orderList().subscribe((result)=>{
-        this.orderData = result;
+        if(result.length > 0){
+          this.isDataAvailable = true;
+          this.orderData = result;
+        }else{
+          this.isDataAvailable = false;
+        }
       })
     }
 

@@ -11,6 +11,7 @@ export class SellerHomeComponent implements OnInit {
   productList: undefined | Product[];
   deleteMessage: undefined | string;
   updateProductMessage: undefined | string;
+  isDataAvailable: boolean = false;
   constructor(private _product: ProductService) { }
 
   ngOnInit(): void {
@@ -27,7 +28,12 @@ export class SellerHomeComponent implements OnInit {
   getProductList() {
     this._product.productList().subscribe((result) => {
       console.log('productList', result);
-      this.productList = result
+      if(result.length > 0) {
+        this.productList = result
+        this.isDataAvailable = true;
+      }else{
+        this.isDataAvailable = false;
+      }
     })
   }
 

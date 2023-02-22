@@ -60,6 +60,4 @@ export class SellerAuthComponent implements OnInit, AfterViewInit {
     this.seller.url.next('')
   }
 
-
-
 }
