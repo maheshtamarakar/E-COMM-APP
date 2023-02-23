@@ -35,8 +35,8 @@ export class UserService {
     .subscribe(result =>{
       console.log('user login', result);
       if(result && result.body?.length){
-        this.inValidUserAuth.emit(false)
         localStorage.setItem('user', JSON.stringify(result.body[0]))
+        this.inValidUserAuth.emit(false)
         this._router.navigate(['/'])
       }else{
         this.inValidUserAuth.emit(true)
