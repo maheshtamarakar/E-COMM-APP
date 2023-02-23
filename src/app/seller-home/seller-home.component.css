@@ -1,13 +1,13 @@
 table{
     text-align: left;
     border-collapse: collapse;
-    color: blueviolet;
+    color: black;
 }
 
 table th, table td{
     padding: 10px;
     min-height: 160px;
-    border: 1px solid blueviolet;
+    border: 1px solid black;
 }
 img{
     width: 100px;

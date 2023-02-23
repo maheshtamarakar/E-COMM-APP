@@ -17,11 +17,6 @@ body {
 }
 
 .form-input {
-  /* height: 35px;
-  margin-bottom: 20px;
-  border: 1px solid blueviolet;
-  color: blueviolet;
-  padding-left: 10px; */
   height: 35px;
   margin-bottom: 20px;
   border: 1px solid #0f1111;
@@ -30,14 +25,10 @@ body {
 }
 
 .form-btn {
-  /* cursor: pointer;
-  height: 35px;
-  border: 1px solid blueviolet; */
 
   cursor: pointer;
   height: 35px;
   border: 1px solid #0f1111;
-  /* border: none; */
   background: #febd69;
   font-weight: 400;
   border-radius: 4px;
@@ -72,7 +63,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background: green;
+  background: black;
 }
 
 .invalid-input {

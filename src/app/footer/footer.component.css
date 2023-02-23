@@ -1,0 +1,17 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+li{
+    list-style: none;
+}
+
+ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.credit{
+    text-align: center;
+    color: white;
+}
