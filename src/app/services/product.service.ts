@@ -98,7 +98,7 @@ export class ProductService {
     return this.http.get<Product[]>("http://127.0.0.1:5000/cart?userId=" + userId,
     {observe: 'response'}).subscribe((result)=>{
       if(result && result.body){
-        this.cartData.emit(result.body);
+        this.cartData.emit(result.body); 
       }
     })
   }
