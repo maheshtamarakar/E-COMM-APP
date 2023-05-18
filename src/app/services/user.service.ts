@@ -19,7 +19,7 @@ export class UserService {
   ) { }
   userSignUp(user: SignUp){
     const payload = JSON.stringify(user);
-    this.http.post('http://127.0.0.1:5000/auth/user-sign-up', payload, httpOptions)//* bserve: 'response' to check the response
+    this.http.post('https://ecomm-api-two.vercel.app/auth/user-sign-up', payload, httpOptions)//* bserve: 'response' to check the response
     .subscribe((result)=>{
       console.log('result', result);
       if(result){
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   userLogin(data: Login){
-    this.http.get<SignUp[]>(`http://127.0.0.1:5000/auth/user-login?email=${data.email}&password=${data.password}`,
+    this.http.get<SignUp[]>(`https://ecomm-api-two.vercel.app/auth/user-login?email=${data.email}&password=${data.password}`,
     {observe: 'response'})
     .subscribe(result =>{
       console.log('user login', result);

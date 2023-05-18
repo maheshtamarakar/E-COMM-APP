@@ -21,7 +21,7 @@ export class SellerService {
 
   userSignUp(data: SignUp){
     const payload = JSON.stringify(data);
-    this.http.post('http://127.0.0.1:5000/auth/sign-up',
+    this.http.post('https://ecomm-api-two.vercel.app/auth/sign-up',
     payload, httpOptions
     ).subscribe((result)=>{      
       console.log('result', result);
@@ -32,7 +32,7 @@ export class SellerService {
   }
 
   userLogin(data: Login){
-    this.http.get(`http://127.0.0.1:5000/auth/login?email=${data.email}&password=${data.password}`,
+    this.http.get(`https://ecomm-api-two.vercel.app/auth/login?email=${data.email}&password=${data.password}`,
     {observe: 'response'} // to get json server response
     ).subscribe((result: any)=>{
       console.log('loginUser result', result);
