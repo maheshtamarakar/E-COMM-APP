@@ -10,7 +10,7 @@ import { SignUp } from '../data-type';
 })
 export class SellerAuthComponent implements OnInit, AfterViewInit {
   // all property
-  showLogin: boolean = false;
+  showLogin: boolean = true;
   authError: string = '';
   // tips
   // always make sure to make the return type of function

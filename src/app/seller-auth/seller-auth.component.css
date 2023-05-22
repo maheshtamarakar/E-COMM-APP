@@ -53,3 +53,11 @@ a {
 .common-form p {
   margin-top: 0.3rem;
 }
+
+.seller-login-form > span {
+  margin-bottom: 20px;
+}
+
+.seller-login-form > input {
+  margin-bottom: 0;
+}

@@ -50,3 +50,11 @@ a {
   cursor: pointer;
   margin-left: 4px;
 }
+
+.user-login-form > span {
+  margin-bottom: 20px;
+}
+
+.user-login-form > input {
+  margin-bottom: 0;
+}

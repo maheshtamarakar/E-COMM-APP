@@ -69,7 +69,7 @@
   <div *ngIf="showLogin" class="user-login">
     <h1>User Login</h1>
     <form
-      class="common-form"
+      class="common-form user-login-form"
       #userLogin="ngForm"
       (ngSubmit)="login(userLogin.value)"
     >
@@ -84,6 +84,7 @@
         type="email"
         email
       />
+      <span>demo_email: <span>demo_user@test.com</span></span>
       <p class="invalid-input">
         <span *ngIf="email.invalid && email.touched"
           >Please Enter Valid Email</span
@@ -102,6 +103,7 @@
         minlength="6"
         maxlength="20"
       />
+      <span>demo_password: <span>demo123</span></span>
       <p class="invalid-input">
         <span *ngIf="password.invalid && password.touched"
           >Please Enter Valid Password</span
