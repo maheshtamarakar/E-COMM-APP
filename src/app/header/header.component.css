@@ -51,7 +51,8 @@
 .nav .search-btn {
   display: flex;
   align-items: center;
-  background: #febd69;
+  /* background: #febd69; */
+  background: var(--main-color);
   width: 2.5rem;
   justify-content: center;
 }

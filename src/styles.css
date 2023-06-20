@@ -1,7 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+:root {
+  --main-color: #db2f2f;
+}
+
 body {
-  font-size: 13px;
-  line-height: 19px;
   color: #111;
+  margin: 0;
+}
+* {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+.mat-h2,
+.mat-headline-6,
+.mat-typography .mat-h2,
+.mat-typography .mat-headline-6,
+.mat-typography h2 {
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0;
+  font-size: 1rem;
 }
 
 .container {
@@ -25,7 +47,6 @@ body {
 }
 
 .form-btn {
-
   cursor: pointer;
   height: 35px;
   border: 1px solid #0f1111;
@@ -101,4 +122,21 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.my-scroll-container {
+  height: calc(100vh);
+  overflow-y: auto;
+}
+
+.my-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.my-scroll-container::-webkit-scrollbar-thumb {
+  background-color: var(--main-color); /* Adjust the color as needed */
+}
+
+.my-scroll-container::-webkit-scrollbar-track {
+  background-color: #E5E7EB; /* Adjust the color as needed */
 }
