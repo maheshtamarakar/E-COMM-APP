@@ -19,6 +19,10 @@ export class HeaderComponent implements OnInit {
   userName: string = '';
   cartItems = 0;
   isHeader: boolean = true;
+
+  showCart: boolean = true;
+  cartData: undefined | Product[];
+
   constructor(
     private route: Router,
     private _product: ProductService,
@@ -56,6 +60,9 @@ export class HeaderComponent implements OnInit {
       this.cartItems = JSON.parse(cartData).length
     } else {
       this._product.cartData.subscribe((items) => {
+        this.cartData = items;
+        console.log('cartData', cartData);
+        
         this.cartItems = items.length
       })
     }
@@ -75,6 +82,7 @@ export class HeaderComponent implements OnInit {
           let userData = userStore && JSON.parse(userStore);
           this.userName = userData.name;
           this.menuType = 'user';
+          
           this._product.getCartList(userData.id)
         } else {
           this.menuType = 'default'
@@ -106,6 +114,22 @@ export class HeaderComponent implements OnInit {
 
   redirectToDetail(id: number) {
     this.route.navigate(['/details/' + id])
+  }
+
+  removeToCart(productId: number) {
+    this._product.removeCart$.next(false)
+    if (!localStorage.getItem('user')) {
+      this._product.removeItemFromCart(productId);
+    } else {
+      let user = localStorage.getItem('user');
+      let userId = user && JSON.parse(user).id;
+      this.cartData?.length && this._product.removeToCart(productId)
+      .subscribe((result) => {
+        if(result){
+          this._product.getCartList(userId)
+        }
+      })
+    }
   }
 
 }

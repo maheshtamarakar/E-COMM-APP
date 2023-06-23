@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login, SignUp } from '../data-type';
+import { ProductService } from './product.service';
 
 
 const httpOptions = {
@@ -15,11 +16,12 @@ export class UserService {
   inValidUserAuth = new EventEmitter<boolean>(false);
   constructor(
     private  http: HttpClient,
-    private _router: Router
+    private _router: Router,
+    private _productService:ProductService
   ) { }
   userSignUp(user: SignUp){
     const payload = JSON.stringify(user);
-    this.http.post('https://ecomm-api-two.vercel.app/auth/user-sign-up', payload, httpOptions)//* bserve: 'response' to check the response
+    this.http.post(`${this._productService.domain}auth/user-sign-up`, payload, httpOptions)//* bserve: 'response' to check the response
     .subscribe((result)=>{
       console.log('result', result);
       if(result){
@@ -30,7 +32,7 @@ export class UserService {
   }
 
   userLogin(data: Login){
-    this.http.get<SignUp[]>(`https://ecomm-api-two.vercel.app/auth/user-login?email=${data.email}&password=${data.password}`,
+    this.http.get<SignUp[]>(`${this._productService.domain}auth/user-login?email=${data.email}&password=${data.password}`,
     {observe: 'response'})
     .subscribe(result =>{
       console.log('user login', result);

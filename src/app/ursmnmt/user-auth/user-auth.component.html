@@ -1,6 +1,14 @@
 <div class="user-auth">
   <p class="error" *ngIf="authError">{{ authError }}</p>
-  <h1 routerLink="/" class="pointer">AnimeWear</h1>
+  <!-- <h1 routerLink="/" class="pointer">AnimeWear</h1> -->
+  <div class="logo w-full h-16 flex justify-center">
+    <img
+      routerLink="/"
+      src="assets/image/myLogo.png"
+      class="w-36 pointer h-11"
+      alt=""
+    />
+  </div>
   <div *ngIf="!showLogin" class="user-signup">
     <h1>User Sign-up</h1>
     <form

@@ -89,7 +89,7 @@ export class UserAuthComponent {
     }
     setTimeout(() => {
       this._productService.getCartList(userId)
-    }, 2000);
+    }, 1000);
   }
   
   ngOnDestroy() {

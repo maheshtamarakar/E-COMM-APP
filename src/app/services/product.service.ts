@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Cart, Order, Product, productUpdated } from '../data-type';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,9 +16,25 @@ export class ProductService {
     'updateProductMessage': undefined
   }
 
+  domain: undefined | string;
+
+  // All End Points
+  PRODUCT: string = 'product';
+  CART: string = 'cart';
+  ORDERS: string = 'orders';
+  ORDER: string = 'order';
+
+  // Observables 
+  cartData$ = new BehaviorSubject<any>({});
+  removeCart$ = new BehaviorSubject<boolean>(false);
+
   cartData = new EventEmitter<Product[] | []>()
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient) {
+    this.domain = environment.domain
+    console.log('this.domain', this.domain);
+    
+  }
 
   addProduct(data: Product){
     let sellerInfo = localStorage.getItem('seller')
@@ -27,43 +44,43 @@ export class ProductService {
     const payload = JSON.stringify(data);
     //* don't forget price is integer */
     //******************* to send the post data you need httpsOptions ********************************
-    return this.http.post('https://ecomm-api-two.vercel.app/product', payload, httpOptions)
+    return this.http.post(`${this.domain}${this.PRODUCT}`, payload, httpOptions)
   }
 
   productList(): Observable<any>{
     let sellerInfo = localStorage.getItem('seller')
     let convToObj = sellerInfo && JSON.parse(sellerInfo)[0]
     const sellerId = convToObj.seller_id
-    return this.http.get<Product[]>(`https://ecomm-api-two.vercel.app/product?seller_id=${sellerId}`)
+    return this.http.get<Product[]>(`${this.domain}${this.PRODUCT}?seller_id=${sellerId}`)
   }
 
   prodDelete(id: number): Observable<any>{
-    return this.http.delete('https://ecomm-api-two.vercel.app/product' + `/${id}`,
+    return this.http.delete(`${this.domain}${this.PRODUCT}` + `/${id}`,
     httpOptions) // to get json server response
   }
 
   getProduct(id: string): Observable<Product>{
-    return this.http.get<Product>('https://ecomm-api-two.vercel.app/product' + `/${id}`)
+    return this.http.get<Product>(`${this.domain}${this.PRODUCT}` + `/${id}`)
   }
 
   updateProduct(product: Product, id: string | null): Observable<Product>{
     const payload = JSON.stringify(product);
-    return this.http.put<Product>('https://ecomm-api-two.vercel.app/product' + `/${id}`, payload, httpOptions)
+    return this.http.put<Product>(`${this.domain}${this.PRODUCT}` + `/${id}`, payload, httpOptions)
   }
 
   popularProduct(): Observable<any>{
     const params = {limit: 3}
-    return this.http.get<Product[]>('https://ecomm-api-two.vercel.app/product', {params})
+    return this.http.get<Product[]>(`${this.domain}${this.PRODUCT}`, {params})
   }
 
   trendyProduct(): Observable<any>{
     const params = {limit: 8}
-    return this.http.get<Product[]>('https://ecomm-api-two.vercel.app/product', {params})
+    return this.http.get<Product[]>(`${this.domain}${this.PRODUCT}`, {params})
   }
 
   searchProduct(query: string): Observable<any>{
     const params = {query: query}
-    return this.http.get<Product[]>('https://ecomm-api-two.vercel.app/product', {params})
+    return this.http.get<Product[]>(`${this.domain}${this.PRODUCT}`, {params})
   }
   localAddToCart(data: Product){
     let cartData = [];
@@ -91,41 +108,42 @@ export class ProductService {
 
   addToCart(cartData: Cart){
     const payload = JSON.stringify(cartData);
-    return this.http.post("https://ecomm-api-two.vercel.app/cart", payload, httpOptions);
+    return this.http.post(`${this.domain}${this.CART}`, payload, httpOptions);
   }
   
   getCartList(userId: number){
-    return this.http.get<Product[]>("https://ecomm-api-two.vercel.app/cart?userId=" + userId,
+    return this.http.get<Product[]>(`${this.domain}${this.CART}?userId=` + userId,
     {observe: 'response'}).subscribe((result)=>{
       if(result && result.body){
+        this.cartData$.next(result.body)
         this.cartData.emit(result.body); 
       }
     })
   }
 
   removeToCart(cartId: number){
-    return this.http.delete("https://ecomm-api-two.vercel.app/cart/"+cartId, httpOptions);
+    return this.http.delete(`${this.domain}${this.CART}/`+cartId, httpOptions);
   }
 
   currentCart(){
     let userStore = localStorage.getItem('user')
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<Cart[]>("https://ecomm-api-two.vercel.app/cart?userId="+userData.id);
+    return this.http.get<Cart[]>(`${this.domain}${this.CART}?userId=`+userData.id);
 
   }
 
   orderNow(data: Order){
     const payload = JSON.stringify(data);
-    return this.http.post("https://ecomm-api-two.vercel.app/orders", payload, httpOptions)
+    return this.http.post(`${this.domain}${this.ORDERS}`, payload, httpOptions)
   }
 
   orderList(){
     let userStore = localStorage.getItem('user')
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<Order[]>("https://ecomm-api-two.vercel.app/orders?userId="+userData.id)
+    return this.http.get<Order[]>(`${this.domain}${this.ORDERS}?userId=`+userData.id)
   }
   deleteCartItems(cartId: number){
-    return this.http.delete("https://ecomm-api-two.vercel.app/cart/"+cartId, httpOptions).subscribe((result)=>{
+    return this.http.delete(`${this.domain}${this.CART}/`+cartId, httpOptions).subscribe((result)=>{
       if(result){
         this.cartData.emit([])
       }
@@ -133,7 +151,7 @@ export class ProductService {
   }
 
   cancelOrder(orderId: number){
-  return this.http.delete("https://ecomm-api-two.vercel.app/order/"+orderId);
+  return this.http.delete(`${this.domain}${this.ORDER}/`+orderId);
 }
 
 }

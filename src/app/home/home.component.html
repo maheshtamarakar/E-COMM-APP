@@ -1,4 +1,4 @@
-<ngb-carousel *ngIf="popularProducts">
+<ngb-carousel>
   <!-- <ng-template ngbSlide>
     <div class="picsum-img-wrapper w-full aspect-w-1920 aspect-h-780 hidden md:bloc">
       <a><img
@@ -71,14 +71,14 @@
 </div> -->
 
 <section class="text-gray-400 body-font">
-  <div class="container px-5 py-24 mx-auto">
+  <div class="py-24 mx-auto">
     <div
       class="mt-2 flex space-x-3 flex-wrap 2xl:flex-nowrap items-center justify-center"
     >
       <div
-        *ngFor="let item of trendyProduct"
+        *ngFor="let item of trendyProduct$ | async"
         routerLink="/details/{{item.id}}"
-        class="md:h-[29rem] w-[20rem] relative rounded-lg shadow-lg hover:shadow-xl cursor-pointer overflow-hidden m-2 text-gray-800"
+        class="md:h-[29rem] w-[18rem] relative rounded-lg shadow-lg hover:shadow-xl cursor-pointer overflow-hidden m-2 text-gray-800"
       >
         <div class="inside-card py-2 px-3">
           <div class="h-80 mx-auto md:h-70 flex items-center relative rounded overflow-hidden">

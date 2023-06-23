@@ -1,11 +1,19 @@
-<nav class="nav" *ngIf="isHeader">
-  <img routerLink="/" src="assets/image/myLogo.png" class="w-36 pointer" alt="">
+<nav class="nav flex-wrap" *ngIf="isHeader">
+  <div class="logo w-full sm:w-36 md:w-36 lg:w-36 flex justify-center">
+    <img
+      routerLink="/"
+      src="assets/image/myLogo.png"
+      class="w-36 pointer"
+      alt=""
+    />
+  </div>
   <div *ngIf="menuType !== 'seller'" class="nav-search">
     <input
       type="text"
       [formControl]="searchInput"
       placeholder="Search for Products"
       (blur)="hideSearch()"
+      class="text-black"
     />
     <!-- <button (click)="submitSearch()" >Search</button> -->
     <div (click)="submitSearch()" class="search-btn pointer">
@@ -17,14 +25,18 @@
       </li>
     </ul>
   </div>
-  <div [ngSwitch]="menuType">
+  <div [ngSwitch]="menuType" class="menu_type text-center flex-1">
     <ul *ngSwitchCase="'default'">
       <li><a routerLink="/seller-auth">Seller</a></li>
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/user-auth">Login / Sign-up</a></li>
       <li>
-        <a href="#"
-          ><mat-icon matBadge="{{ cartItems }}" matBadgeColor="warn"
+        <a
+          ><mat-icon
+            class="cursor-pointer"
+            (click)="showCart = !showCart"
+            matBadge="{{ cartItems }}"
+            matBadgeColor="warn"
             >add_shopping_cart</mat-icon
           ></a
         >
@@ -38,8 +50,13 @@
       <li><a class="pointer" routerLink="/my-orders">My Orders</a></li>
       <li><a class="pointer" (click)="userLogout()">Logout</a></li>
       <li>
-        <a [routerLink]="cartItems > 0 ? 'cart-page' : null"
-          ><mat-icon matBadge="{{ cartItems }}" matBadgeColor="warn"
+        <!-- [routerLink]="cartItems > 0 ? 'cart-page' : null" -->
+        <a
+          ><mat-icon
+            class="cursor-pointer"
+            (click)="showCart = !showCart"
+            matBadge="{{ cartItems }}"
+            matBadgeColor="warn"
             >add_shopping_cart</mat-icon
           ></a
         >
@@ -55,3 +72,57 @@
     </ul>
   </div>
 </nav>
+
+<div
+  [ngClass]="showCart ? 'translate-x-0' : 'translate-x-full'"
+  (click)="showCart = !showCart"
+  class="cart bg-red-50 shadow-3xl h-full fixed w-[100vw] md:w-[30vw] top-0 right-0 transition dark:bg-gray-700 dark:text-gray-100 overflow-auto transform z-30 py-3"
+>
+  <div class="side_cart">
+    <div
+      class="cart__heading flex justify-between border-b border-red-600 px-3"
+    >
+      <div>
+        <h2 class="font-bold text-xl md:text-2xl m-0 text-heading pb-2">
+          Shopping cart
+        </h2>
+      </div>
+      <div class="cross">
+        <mat-icon class="text-3xl cursor-pointer z-40">cancel</mat-icon>
+      </div>
+    </div>
+    <ol class="font-semibold ml-8 text-decoration-none">
+      <!-- if cart is empty -->
+      <div *ngIf="!cartData?.length" class="my-4 font-semibold">
+        Your cart is Empty!
+      </div>
+      <li *ngFor="let cart of cartData">
+        <div class="flex my-5">
+          <div
+            matBadge="{{ cart?.quantity }}"
+            matBadgeColor="warn"
+            class="mr-2 flex font-semibold"
+          >
+            <img
+              src="{{ cart?.image }}"
+              alt="img"
+              class="object-contain rounded-lg border bg-white shadow-lg h-16 w-16"
+            />
+          </div>
+          <div class="w-2/3 font-semibold flex items-center capitalize">
+            {{ cart?.name }}
+          </div>
+          <div
+            class="flex font-semibold justify-center items-center w-[37%] text-sm"
+          >
+            <mat-icon
+              (click)="removeToCart(cart.id)"
+              class="cursor-pointer text-red-500"
+              >cancel</mat-icon
+            >
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
