@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { ProductService } from '../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { FormControl } from '@angular/forms';
-import { Product } from '../data-type';
-import { SellerService } from '../services/seller.service';
+import { Product } from '../../data-type';
+import { SellerService } from '../../seller/service/seller.service';
 
 @Component({
   selector: 'app-header',
@@ -22,12 +22,23 @@ export class HeaderComponent implements OnInit {
 
   showCart: boolean = true;
   cartData: undefined | Product[];
+  totalPrice: number | undefined;
 
   constructor(
     private route: Router,
     private _product: ProductService,
     private _seller: SellerService,
-  ) { }
+  ) {
+    this.handleCartData()    
+    this._product.cartData.subscribe((items) => {
+      this.cartData = items;
+      this.cartItems = items.length;
+      this.handlePrice(items);
+      })
+    this._product.showSideCart$.subscribe((isAddCart) => {
+      this.showCart = isAddCart
+    })
+  }
 
   ngOnInit(): void {
     this._seller.url.subscribe((url) => {
@@ -52,19 +63,25 @@ export class HeaderComponent implements OnInit {
           })
         }
       });
-
     // make a radio button giving true and false
+  }
 
+  handlePrice(items: Product[]): void {
+    let price = 0;
+    items.forEach(item => {
+      if(item.quantity) price = price + (+item.price* +item.quantity); //(+item.price) converts string to number
+    });
+    // this.totalPrice = price+(price/10)+100-(price/10);
+    this.totalPrice = price;
+  }
+
+  handleCartData(): void {
     let cartData = localStorage.getItem('localCart')
     if (cartData) {
-      this.cartItems = JSON.parse(cartData).length
-    } else {
-      this._product.cartData.subscribe((items) => {
-        this.cartData = items;
-        console.log('cartData', cartData);
-        
-        this.cartItems = items.length
-      })
+      let items = JSON.parse(cartData);
+      this.cartItems = items.length;
+      this.cartData = items;
+      this.handlePrice(items);
     }
   }
 
@@ -82,7 +99,7 @@ export class HeaderComponent implements OnInit {
           let userData = userStore && JSON.parse(userStore);
           this.userName = userData.name;
           this.menuType = 'user';
-          
+
           this._product.getCartList(userData.id)
         } else {
           this.menuType = 'default'
@@ -124,11 +141,11 @@ export class HeaderComponent implements OnInit {
       let user = localStorage.getItem('user');
       let userId = user && JSON.parse(user).id;
       this.cartData?.length && this._product.removeToCart(productId)
-      .subscribe((result) => {
-        if(result){
-          this._product.getCartList(userId)
-        }
-      })
+        .subscribe((result) => {
+          if (result) {
+            this._product.getCartList(userId)
+          }
+        })
     }
   }
 

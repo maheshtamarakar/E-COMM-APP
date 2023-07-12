@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart, Login, Product, SignUp } from 'src/app/data-type';
 import { ProductService } from 'src/app/services/product.service';
-import { SellerService } from 'src/app/services/seller.service';
-import { UserService } from 'src/app/services/user.service';
+import { SellerService } from 'src/app/seller/service/seller.service';
+import { UserService } from 'src/app/ursmnmt/service/user.service';
 
 @Component({
   selector: 'app-user-auth',

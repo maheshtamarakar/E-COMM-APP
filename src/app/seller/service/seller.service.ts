@@ -1,8 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http' // will help call api url
-import { Login, SignUp } from '../data-type';
+import { Login, SignUp } from '../../data-type';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router'
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,12 +17,15 @@ export class SellerService {
   //rxjs to control the authgaurd being true or false
   isSellerLoggedIn = new BehaviorSubject<boolean>(false)
   public url = new Subject<string>();
+  private domain: undefined | string;
 
-  constructor(private http:HttpClient, private router: Router) { }
+  constructor(private http:HttpClient, private router: Router) {
+    this.domain = environment.domain;
+   }
 
   userSignUp(data: SignUp){
     const payload = JSON.stringify(data);
-    this.http.post('https://ecomm-api-two.vercel.app/auth/sign-up',
+    this.http.post(`${this.domain}auth/sign-up`,
     payload, httpOptions
     ).subscribe((result)=>{      
       console.log('result', result);
@@ -32,7 +36,7 @@ export class SellerService {
   }
 
   userLogin(data: Login){
-    this.http.get(`https://ecomm-api-two.vercel.app/auth/login?email=${data.email}&password=${data.password}`,
+    this.http.get(`${this.domain}auth/login?email=${data.email}&password=${data.password}`,
     {observe: 'response'} // to get json server response
     ).subscribe((result: any)=>{
       console.log('loginUser result', result);

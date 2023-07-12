@@ -44,34 +44,13 @@
   </ng-template>
 </ngb-carousel>
 
-<!-- <div class="product-list-wrapper custom-container">
-	<h1>Trendy Products</h1>
-	<div class="trendyProduct-container">
-		<div *ngFor="let item of trendyProduct" class="product-cart">
-			<div class="product-item">
-				<img routerLink="/details/{{item.id}}" class="pointer" src="{{item.image}}" alt="">
-				<div class="product-details">
-					<h6 class="name-head">{{item.name}}</h6>
-					<div class="product-price">
-						<h6>₹{{item.price | number: '2.'}}</h6>
-					</div>
-					<div [style]="{backgroundColor: item.color}" class="product-color">
-						<h6>{{item.color | titlecase}}</h6>
-					</div>
-				</div>
-				<div class="product-footer">
-					<button class="view-detail" routerLink="/details/{{item.id}}">View Details</button>
-					<button class="add-to-cart" >Add to Cart</button> -->
-<!-- <a routerLink="/details/{{item.id}}">View Details</a>
-					<a href="">Add to Cart</a> -->
-<!-- </div>
-			</div>
-		</div>
-	</div>
-</div> -->
-
-<section class="text-gray-400 body-font">
-  <div class="py-24 mx-auto">
+<div class="text-gray-400 body-font">
+  <section class="cloth__categories">
+    <app-cloth-categories></app-cloth-categories>
+  </section>
+  <section class=" popular__products py-24 mx-auto">
+    <h1>Bestselling Products</h1>
+    <div class="bottom__border"></div>
     <div
       class="mt-2 flex space-x-3 flex-wrap 2xl:flex-nowrap items-center justify-center"
     >
@@ -101,5 +80,5 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Product } from '../data-type';
-import { ProductService } from '../services/product.service';
+import { Product } from '../../data-type';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-seller-add-product',

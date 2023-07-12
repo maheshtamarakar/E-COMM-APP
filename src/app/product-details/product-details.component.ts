@@ -18,8 +18,6 @@ export class ProductDetailsComponent implements OnInit {
     private _productService: ProductService
   ) { 
     this._productService.removeCart$.subscribe(isRemoved => {
-      console.log('isRemoved', isRemoved);
-      
       this.removeCart = isRemoved;
     })
   }
@@ -27,8 +25,6 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     let productId = this._activeRoute.snapshot.paramMap.get('productId');
     productId && this._productService.getProduct(productId).subscribe((result) => {
-      console.log('productDetails');
-      
       this.productData = result;
       let cartData = localStorage.getItem('localCart');
       if (productId && cartData) {
@@ -66,6 +62,7 @@ export class ProductDetailsComponent implements OnInit {
   }
   AddToCart() {
     if (this.productData) {
+      this._productService.showSideCart$.next(true);
       this.productData.quantity = this.productQuantity
       // if user is not logged in
       if (!localStorage.getItem('user')) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SellerService } from './services/seller.service';
+import { SellerService } from './seller/service/seller.service';
 
 @Component({
   selector: 'app-root',

@@ -75,7 +75,6 @@
 
 <div
   [ngClass]="showCart ? 'translate-x-0' : 'translate-x-full'"
-  (click)="showCart = !showCart"
   class="cart bg-red-50 shadow-3xl h-full fixed w-[100vw] md:w-[30vw] top-0 right-0 transition dark:bg-gray-700 dark:text-gray-100 overflow-auto transform z-30 py-3"
 >
   <div class="side_cart">
@@ -88,7 +87,11 @@
         </h2>
       </div>
       <div class="cross">
-        <mat-icon class="text-3xl cursor-pointer z-40">cancel</mat-icon>
+        <mat-icon
+          (click)="showCart = !showCart"
+          class="text-3xl cursor-pointer z-40"
+          >cancel</mat-icon
+        >
       </div>
     </div>
     <ol class="font-semibold ml-8 text-decoration-none">
@@ -97,7 +100,7 @@
         Your cart is Empty!
       </div>
       <li *ngFor="let cart of cartData">
-        <div class="flex my-5">
+        <div class="flex my-4">
           <div
             matBadge="{{ cart?.quantity }}"
             matBadgeColor="warn"
@@ -124,5 +127,25 @@
         </div>
       </li>
     </ol>
+    <div class="font-bold my-2 ml-8">Subtotal: ₹{{totalPrice ? (totalPrice | number: '2.') : 0 }}</div>
+    <div class="flex ml-8">
+      <div (click)="showCart = !showCart" routerLink="/checkout">
+        <button
+          [disabled]="!cartData?.length"
+          [ngClass]="!cartData?.length ? 'bg-red-300 hover:bg-red-300': 'bg-red-500 hover:bg-red-600' "
+          class="flex text-white  border-0 py-2 px-4 mr-2 focus:outline-none rounded text-sm"
+        >
+          Checkout
+        </button>
+      </div>
+      <button
+        [disabled]="!cartData?.length"
+        [ngClass]="!cartData?.length ? 'bg-red-300 hover:bg-red-300': 'bg-red-500 hover:bg-red-600' "
+        onClick="{clearCart}"
+        class="flex text-white border-0 py-2 px-4 mr-2 focus:outline-none rounded text-sm"
+      >
+        Clear
+      </button>
+    </div>
   </div>
 </div>
