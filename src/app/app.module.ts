@@ -1,58 +1,28 @@
-import { HttpClientModule } from '@angular/common/http';
+
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { SellerAuthComponent } from './seller-auth/seller-auth.component';
-import { SellerHomeComponent } from './seller-home/seller-home.component';
-import { SellerAddProductComponent } from './seller-add-product/seller-add-product.component';
-import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 // angular moterial imports
-import {MatIconModule} from '@angular/material/icon';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SearchComponent } from './header/search/search.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-import { UserAuthComponent } from './ursmnmt/user-auth/user-auth.component';
-import { FooterComponent } from './footer/footer.component';
-import { CartPageComponent } from './cart-page/cart-page.component';
-import { CheckoutComponent } from './cart-page/checkout/checkout.component';
-import { MyOrdersComponent } from './cart-page/my-orders/my-orders.component';
-import {MatBadgeModule} from '@angular/material/badge';
+import { ClothCategoriesComponent } from './home/cloth-categories/cloth-categories.component';
+import { SharedModule } from './shared/shared.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     HomeComponent,
-    SellerAuthComponent,
-    SellerHomeComponent,
-    SellerAddProductComponent,
-    SellerUpdateProductComponent,
-    SearchComponent,
-    ProductDetailsComponent,
-    UserAuthComponent,
-    FooterComponent,
-    CartPageComponent,
-    CheckoutComponent,
-    MyOrdersComponent
+    ClothCategoriesComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    SharedModule,
+    BrowserModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatBadgeModule,
-    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

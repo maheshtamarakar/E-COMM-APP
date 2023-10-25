@@ -1,0 +1,151 @@
+<nav class="nav flex-wrap" *ngIf="isHeader">
+  <div class="logo w-full sm:w-36 md:w-36 lg:w-36 flex justify-center">
+    <img
+      routerLink="/"
+      src="assets/image/myLogo.png"
+      class="w-36 pointer"
+      alt=""
+    />
+  </div>
+  <div *ngIf="menuType !== 'seller'" class="nav-search">
+    <input
+      type="text"
+      [formControl]="searchInput"
+      placeholder="Search for Products"
+      (blur)="hideSearch()"
+      class="text-black"
+    />
+    <!-- <button (click)="submitSearch()" >Search</button> -->
+    <div (click)="submitSearch()" class="search-btn pointer">
+      <mat-icon>search</mat-icon>
+    </div>
+    <ul class="suggested-result" *ngIf="searchResult">
+      <li *ngFor="let item of searchResult">
+        <a (mousedown)="redirectToDetail(item.id)" href="">{{ item.name }}</a>
+      </li>
+    </ul>
+  </div>
+  <div [ngSwitch]="menuType" class="menu_type text-center flex-1">
+    <ul *ngSwitchCase="'default'">
+      <li><a routerLink="/seller-auth/login">Seller</a></li>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/user-auth/login">Login / Sign-up</a></li>
+      <li>
+        <a
+          ><mat-icon
+            class="cursor-pointer"
+            (click)="showCart = !showCart"
+            matBadge="{{ cartItems }}"
+            matBadgeColor="warn"
+            >add_shopping_cart</mat-icon
+          ></a
+        >
+      </li>
+    </ul>
+    <ul *ngSwitchCase="'user'">
+      <li><a routerLink="/">Home</a></li>
+      <li>
+        <a routerLink="/">{{ userName | titlecase }}</a>
+      </li>
+      <li><a class="pointer" routerLink="/my-orders">My Orders</a></li>
+      <li><a class="pointer" (click)="userLogout()">Logout</a></li>
+      <li>
+        <!-- [routerLink]="cartItems > 0 ? 'cart-page' : null" -->
+        <a
+          ><mat-icon
+            class="cursor-pointer"
+            (click)="showCart = !showCart"
+            matBadge="{{ cartItems }}"
+            matBadgeColor="warn"
+            >add_shopping_cart</mat-icon
+          ></a
+        >
+      </li>
+    </ul>
+    <ul class="seller-account" *ngSwitchCase="'seller'">
+      <li><a routerLink="/seller-home">Product List</a></li>
+      <li><a routerLink="/seller-add-product">Add Product</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+      <li>
+        <a href="#">{{ sellerName | titlecase }}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div
+  [ngClass]="showCart ? 'translate-x-0' : 'translate-x-full'"
+  class="cart bg-red-50 shadow-3xl h-full fixed w-[100vw] md:w-[30vw] top-0 right-0 transition dark:bg-gray-700 dark:text-gray-100 overflow-auto transform z-30 py-3"
+>
+  <div class="side_cart">
+    <div
+      class="cart__heading flex justify-between border-b border-red-600 px-3"
+    >
+      <div>
+        <h2 class="font-bold text-xl md:text-2xl m-0 text-heading pb-2">
+          Shopping cart
+        </h2>
+      </div>
+      <div class="cross">
+        <mat-icon
+          (click)="showCart = !showCart"
+          class="text-3xl cursor-pointer z-40"
+          >cancel</mat-icon
+        >
+      </div>
+    </div>
+    <ol class="font-semibold ml-8 text-decoration-none">
+      <!-- if cart is empty -->
+      <div *ngIf="!cartData?.length" class="my-4 font-semibold">
+        Your cart is Empty!
+      </div>
+      <li *ngFor="let cart of cartData">
+        <div class="flex my-4">
+          <div
+            matBadge="{{ cart?.quantity }}"
+            matBadgeColor="warn"
+            class="mr-2 flex font-semibold"
+          >
+            <img
+              src="{{ cart?.image }}"
+              alt="img"
+              class="object-contain rounded-lg border bg-white shadow-lg h-16 w-16"
+            />
+          </div>
+          <div class="w-2/3 font-semibold flex items-center capitalize">
+            {{ cart?.name }}
+          </div>
+          <div
+            class="flex font-semibold justify-center items-center w-[37%] text-sm"
+          >
+            <mat-icon
+              (click)="removeToCart(cart.id)"
+              class="cursor-pointer text-red-500"
+              >cancel</mat-icon
+            >
+          </div>
+        </div>
+      </li>
+    </ol>
+    <div class="font-bold my-2 ml-8">Subtotal: ₹{{totalPrice ? (totalPrice | number: '2.') : 0 }}</div>
+    <div class="flex ml-8">
+      <div (click)="showCart = !showCart" routerLink="/checkout">
+        <button
+          [disabled]="!cartData?.length"
+          [ngClass]="!cartData?.length ? 'bg-red-300 hover:bg-red-300': 'bg-red-500 hover:bg-red-600' "
+          class="flex text-white  border-0 py-2 px-4 mr-2 focus:outline-none rounded text-sm"
+        >
+          Checkout
+        </button>
+      </div>
+      <button
+        [disabled]="!cartData?.length"
+        [ngClass]="!cartData?.length ? 'bg-red-300 hover:bg-red-300': 'bg-red-500 hover:bg-red-600' "
+        onClick="{clearCart}"
+        class="flex text-white border-0 py-2 px-4 mr-2 focus:outline-none rounded text-sm"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+</div>

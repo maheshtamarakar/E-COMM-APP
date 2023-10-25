@@ -1,39 +1,84 @@
-<ngb-carousel *ngIf="popularProducts">
-	<ng-template *ngFor="let product of popularProducts" ngbSlide>
-		<div class="picsum-img-wrapper">
-			<a routerLink="/details/{{product.id}}"><img class="popular_product_img" [src]="product.image"
-					alt="Random first slide" />
-			</a>
-		</div>
-		<div class="carousel-caption">
-			<h3>{{product.name}}</h3>
-			<p>{{product.description}}</p>
-		</div>
-	</ng-template>
+<ngb-carousel>
+  <!-- <ng-template ngbSlide>
+    <div class="picsum-img-wrapper w-full aspect-w-1920 aspect-h-780 hidden md:bloc">
+      <a><img
+          class="popular_product_img"
+          src="https://codeswear.nyc3.cdn.digitaloceanspaces.com/constants/landing/banner/1.webp"
+          alt="Random first slide"
+        />
+      </a>
+    </div> -->
+    <!-- <div class="carousel-caption">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+    </div> -->
+  <!-- </ng-template> -->
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img
+          class="w-full h-full object-cover"
+          src="https://codeswear.nyc3.cdn.digitaloceanspaces.com/constants/landing/banner/2.webp"
+          alt="Random first slide"
+        />
+    </div>
+    <!-- <div class="carousel-caption">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+    </div> -->
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper"><img
+          class="w-full h-full object-cover"
+          src="https://codeswear.nyc3.cdn.digitaloceanspaces.com/constants/landing/banner/3.webp"
+          alt="Random first slide"
+        />
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper"><img
+          class="w-full h-full object-cover"
+          src="https://codeswear.nyc3.cdn.digitaloceanspaces.com/constants/landing/banner/4.webp"
+          alt="Random first slide"
+        />
+    </div>
+  </ng-template>
 </ngb-carousel>
 
-<div class="product-list-wrapper custom-container">
-	<h1>Trendy Products</h1>
-	<div class="trendyProduct-container">
-		<div *ngFor="let item of trendyProduct" class="product-cart">
-			<div class="product-item">
-				<img routerLink="/details/{{item.id}}" class="pointer" src="{{item.image}}" alt="">
-				<div class="product-details">
-					<h6 class="name-head">{{item.name}}</h6>
-					<div class="product-price">
-						<h6>₹{{item.price | number: '2.'}}</h6>
-					</div>
-					<div [style]="{backgroundColor: item.color}" class="product-color">
-						<h6>{{item.color | titlecase}}</h6>
-					</div>
-				</div>
-				<div class="product-footer">
-					<button class="view-detail" routerLink="/details/{{item.id}}">View Details</button>
-					<button class="add-to-cart" >Add to Cart</button>
-					<!-- <a routerLink="/details/{{item.id}}">View Details</a>
-					<a href="">Add to Cart</a> -->
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="text-gray-400 body-font">
+  <section class="cloth__categories">
+    <app-cloth-categories></app-cloth-categories>
+  </section>
+  <section class=" popular__products py-24 mx-auto">
+    <h1>Bestselling Products</h1>
+    <div class="bottom__border"></div>
+    <div
+      class="mt-2 flex space-x-3 flex-wrap 2xl:flex-nowrap items-center justify-center"
+    >
+      <div
+        *ngFor="let item of trendyProduct$ | async"
+        routerLink="/details/{{item.id}}"
+        class="md:h-[29rem] w-[18rem] relative rounded-lg shadow-lg hover:shadow-xl cursor-pointer overflow-hidden m-2 text-gray-800"
+      >
+        <div class="inside-card py-2 px-3">
+          <div class="h-80 mx-auto md:h-70 flex items-center relative rounded overflow-hidden">
+            <img
+              alt="ecommerce"
+              class="object-contain rounded-sm hover:scale-105 transition-transform duration-300"
+              src="{{ item.image }}"
+              src="https://dummyimage.com/420x260"
+            />
+          </div>
+          <div class="mt-4">
+            <h3 class="text-gray-400 text-xs tracking-widest title-font mb-1">
+              {{ item.category | uppercase }}
+            </h3>
+            <h2 class="font-bold mb-2 dark:text-gray-100 text-xs truncate max-w-xs">
+              {{ item.name }}
+            </h2>
+            <p class="mt-1 text-gray-400">₹{{ item.price | number : "2." }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

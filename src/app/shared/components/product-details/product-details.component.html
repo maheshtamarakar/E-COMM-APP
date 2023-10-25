@@ -1,0 +1,160 @@
+<!-- <div class="row product-details" *ngIf="productData">
+  <div class="col-sm-6">
+    <img class="productImage" src="{{ productData.image }}" alt="" />
+  </div>
+  <div class="col-sm-6">
+    <div class="details">
+      <h1>{{ productData.name }}</h1>
+      <h3>Price: {{ productData.price | number : "2." }}</h3>
+      <div>
+        Color:
+        <h5
+          [style.backgroundColor]="productData.color"
+          class="product-color"
+        ></h5>
+      </div>
+      <h3>Category: {{ productData.category }}</h3>
+      <p>Description: {{ productData.description }}</p>
+      <button *ngIf="!removeCart" class="form-btn" (click)="AddToCart()">
+        Add to Cart
+      </button>
+      <button
+        *ngIf="removeCart"
+        class="form-btn"
+        (click)="removeToCart(productData.id)"
+      >
+        Remove to Cart
+      </button>
+      <button class="form-btn buy-now-btn">Buy Now</button>
+      <div class="quantity-group">
+        <button (click)="handleQuantity('min')">-</button>
+        <input
+          type="text"
+          class="center-text"
+          [value]="productQuantity"
+          name=""
+          id=""
+        />
+        <button (click)="handleQuantity('plus')">+</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<section class="text-gray-400 body-font overflow-hidden" *ngIf="productData">
+  <div class="container mx-auto lg:py-6">
+    <div
+      class="lg:w-4/5 mx-auto flex flex-wrap items-start relative rounded overflow-hidden"
+    >
+      <img
+        alt="ecommerce"
+        class="w-full lg:h-auto object-center object-contain rounded-md mx-auto mt-3"
+        src="{{ productData.image }}"
+        style="width: 17.7rem"
+      />
+      <div class="lg:w-2/3 w-full lg:pl-10 mt-6 lg:mt-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">
+          AnimeWear
+        </h2>
+        <h1 class="text-black font-bold text-xl md:text-3xl title-font mb-1">
+          {{ productData.name }}
+        </h1>
+        <div class="product-description">
+          <h2>Product Description:</h2>
+          <p class="leading-relaxed">
+            {{ productData.description }}
+          </p>
+        </div>
+        <div class="product-highlight">
+          <h2>Product Highlights:</h2>
+          <p class="leading-relaxed">* will have highlights</p>
+          <p class="leading-relaxed">* will have highlights</p>
+        </div>
+        <div
+          class="flex mt-6 items-center pb-1 border-b-2 border-gray-800 mb-1"
+        >
+          <div class="flex">
+            <span class="mr-3">Color</span>
+            <button
+              class="border-2 border-gray-800 rounded-full w-6 h-6 focus:outline-none"
+            ></button>
+            <button
+              class="border-2 border-gray-800 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"
+            ></button>
+            <button
+              class="border-2 border-gray-800 ml-1 bg-red-500 rounded-full w-6 h-6 focus:outline-none"
+            ></button>
+          </div>
+          <div class="flex ml-6 items-center">
+            <span class="mr-3">Size</span>
+            <div class="relative">
+              <select
+                class="rounded border border-gray-700 focus:ring-2 focus:ring-red-900 bg-transparent appearance-none py-2 focus:outline-none focus:border-red-500 pl-3 pr-10"
+              >
+                <option>SM</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+              </select>
+              <span
+                class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center"
+              >
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="w-4 h-4"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M6 9l6 6 6-6"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="price__cart_values flex">
+          <span class="w-[6.5rem] title-font font-medium text-2xl text-black"
+            >₹{{ productData.price | number : "2." }}</span
+          >
+          <div
+            class="flex font-semibold ml-10 items-center w-[37%] text-sm"
+          >
+            <mat-icon (click)="handleQuantity('min')" class="cursor-pointer text-red-500"
+              >remove_circle</mat-icon
+            >
+            <span class="mx-2">{{productQuantity}}</span>
+            <mat-icon (click)="handleQuantity('plus')" class="cursor-pointer text-red-500">add_circle</mat-icon>
+          </div>
+
+        </div>
+          <div class="shopping__btns flex mt-3">
+            <button
+              class="flex mr-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded-full"
+            >
+              Buy Now
+            </button>
+            <button
+              *ngIf="!removeCart"
+              class="form-btn"
+              (click)="AddToCart()"
+              class="flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded-full"
+            >
+              Add to Cart
+            </button>
+
+            <button
+              *ngIf="removeCart"
+              class="flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded-full"
+              (click)="removeToCart(productData.id)"
+            >
+              Remove to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

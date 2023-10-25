@@ -1,0 +1,118 @@
+:root {
+  --primary-color: #fff;
+  --secondary-color: #0f1111;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 1rem;
+  background-color: #0f1111;
+}
+
+.nav h1 {
+  font-size: 40px;
+  color: #fff;
+  margin: 0;
+}
+
+.nav ul {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  align-items: center;
+}
+
+.nav li {
+  padding-left: 15px;
+  font-size: 18px;
+}
+
+.nav li a {
+  text-decoration: none;
+  /* color: #fff; */
+  display: flex;
+  align-items: center;
+}
+
+
+.nav .nav-search {
+  flex: 1; /* takes all the remaining space */
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 0.6rem;
+}
+
+.nav .search-btn {
+  display: flex;
+  align-items: center;
+  background: var(--main-color);
+  width: 2.5rem;
+  justify-content: center;
+}
+
+.nav .nav-search input {
+  flex: 1;
+  height: 38px;
+  border: unset;
+  border-right: 0px;
+  padding: 0 0.5rem;
+}
+
+.nav .nav-search input:focus {
+  outline: none !important;
+}
+
+.nav .nav-search button {
+  height: 38px;
+  border: unset;
+  color: black;
+}
+
+.nav{
+  text-decoration: none;
+  color: #fff;
+}
+
+.seller-account li:nth-child(3) {
+  cursor: pointer;
+}
+.seller-account{
+  padding: 1rem !important;
+}
+
+.suggested-result {
+  position: absolute;
+  display: list-item !important;
+  z-index: 10;
+  background-color: #ffff;
+  width: 350px;
+  top: 44px;
+  border: 1px solid #ddd;
+}
+
+.suggested-result li {
+  border: 1px solid #fff;
+  padding: 5px;
+}
+
+.suggested-result li a {
+  cursor: pointer;
+  color: #0f1111;
+}
+
+.menu_type {
+  min-width: 20rem;
+}
+
+.menu_type a:hover{
+  color: var(--main-color);
+}
+
+.cross mat-icon {
+  width: 2rem !important;
+  height: 2rem !important;
+}
