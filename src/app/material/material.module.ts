@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
 
 const MaterialComponents = [
   MatSnackBarModule
@@ -10,10 +12,14 @@ const MaterialComponents = [
 @NgModule({
   declarations: [],
   imports: [
-    MaterialComponents
+    MaterialComponents,
+    MatIconModule,
+    MatBadgeModule,
   ],
   exports: [
-    MaterialComponents
+    MaterialComponents,
+    MatIconModule,
+    MatBadgeModule,
   ]
 })
 export class MaterialModule { }

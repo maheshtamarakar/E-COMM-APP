@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { FormControl } from '@angular/forms';
-import { Product } from '../../data-type';
-import { SellerService } from '../../seller/service/seller.service';
+import { Product } from '../../../data-type';
+import { SellerService } from '../../../seller/service/seller.service';
 
 @Component({
   selector: 'app-header',
@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this._seller.url.subscribe((url) => {
-      console.log('url: ' + url);
+      // console.log('url: ' + url);
       if (url.includes('seller-auth') || url.includes('user-auth')) {
         this.isHeader = false;
       } else {

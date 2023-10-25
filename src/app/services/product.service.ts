@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Cart, Order, Product, productUpdated } from '../data-type';
 import { environment } from 'src/environments/environment';
-import { HttpService } from '../shared-service/http.service';
+import { HttpService } from '../shared/services/http.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { CartPageComponent } from './cart-page/cart-page.component';
-import { CheckoutComponent } from './cart-page/checkout/checkout.component';
-import { MyOrdersComponent } from './cart-page/my-orders/my-orders.component';
-import { SearchComponent } from './components/header/search/search.component';
+import { CartPageComponent } from './shared/components/cart-page/cart-page.component';
+import { CheckoutComponent } from './shared/components/cart-page/checkout/checkout.component';
+import { MyOrdersComponent } from './shared/components/cart-page/my-orders/my-orders.component';
+import { SearchComponent } from './shared/components/header/search/search.component';
 import { HomeComponent } from './home/home.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductDetailsComponent } from './shared/components/product-details/product-details.component';
 import { SellerAddProductComponent } from './seller/seller-add-product/seller-add-product.component';
-import { SellerAuthComponent } from './seller/seller-auth/seller-auth.component';
 import { SellerHomeComponent } from './seller/seller-home/seller-home.component';
 import { SellerUpdateProductComponent } from './seller/seller-update-product/seller-update-product.component';
-import { UserAuthComponent } from './ursmnmt/user-auth/user-auth.component';
 
 const routes: Routes = [
   {
     path:'',
     component:HomeComponent
   },
+  // {
+  //   path:'seller-auth',
+  //   component:SellerAuthComponent
+  // },
   {
     path:'seller-auth',
-    component:SellerAuthComponent
+    loadChildren: () =>
+    import('./seller/seller.module').then(
+      (mod)=> mod.SellerModule
+    ),
   },
   {
     path:'seller-home',
@@ -47,7 +52,10 @@ const routes: Routes = [
   },
   {
     path:'user-auth',
-    component:UserAuthComponent,
+    loadChildren: () =>
+    import('./usermnmt/usermnmt.module').then(
+      (mod)=> mod.UsermnmtModule
+    ),
   },
   {
     path:'cart-page',
