@@ -28,6 +28,13 @@ const routes: Routes = [
     ),
   },
   {
+    path:'user-auth',
+    loadChildren: () =>
+    import('./usermnmt/usermnmt.module').then(
+      (mod)=> mod.UsermnmtModule
+    ),
+  },
+  {
     path:'seller-home',
     component:SellerHomeComponent,
     canActivate: [AuthGuard]
@@ -49,13 +56,6 @@ const routes: Routes = [
   {
     path:'details/:productId',
     component:ProductDetailsComponent,
-  },
-  {
-    path:'user-auth',
-    loadChildren: () =>
-    import('./usermnmt/usermnmt.module').then(
-      (mod)=> mod.UsermnmtModule
-    ),
   },
   {
     path:'cart-page',
